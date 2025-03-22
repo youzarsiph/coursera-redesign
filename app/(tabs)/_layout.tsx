@@ -1,15 +1,45 @@
 import React from 'react'
-import { MaterialIcons } from '@expo/vector-icons'
-import { Tabs } from 'expo-router'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { router, Tabs } from 'expo-router'
 
-import { TabBar, TabsHeader } from '@/ui'
+import { TabBar, TabsHeader } from '@/lib'
+import { Appbar, Menu } from 'react-native-paper'
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof MaterialIcons>['name']
+  name: React.ComponentProps<typeof MaterialCommunityIcons>['name']
   color: string
 }) {
-  return <MaterialIcons size={24} {...props} />
+  return <MaterialCommunityIcons size={24} {...props} />
+}
+
+const HeaderRight = (props: any) => {
+  const [visible, setVisible] = React.useState(false)
+
+  return (
+    <Menu
+      visible={visible}
+      onDismiss={() => setVisible(!visible)}
+      anchorPosition="bottom"
+      anchor={
+        <Appbar.Action
+          {...props}
+          icon="dots-vertical"
+          onPress={() => setVisible(!visible)}
+        />
+      }
+    >
+      <Menu.Item
+        title="Settings"
+        leadingIcon="cog"
+        trailingIcon="chevron-right"
+        onPress={() => {
+          setVisible(!visible)
+          router.push('/settings')
+        }}
+      />
+    </Menu>
+  )
 }
 
 const TabLayout = () => (
@@ -17,26 +47,61 @@ const TabLayout = () => (
     tabBar={(props) => <TabBar {...props} />}
     screenOptions={{
       header: (props) => <TabsHeader navProps={props} children={undefined} />,
-      headerShown: false,
     }}
   >
-    <Tabs.Screen
-      name="index"
-      options={{
-        title: 'Home',
-        tabBarIcon: ({ color, focused }) => (
-          <TabBarIcon name={focused ? 'home-filled' : 'home'} color={color} />
-        ),
-      }}
-    />
     <Tabs.Screen
       name="explore"
       options={{
         title: 'Explore',
         tabBarIcon: ({ color, focused }) => (
           <TabBarIcon
-            name={focused ? 'explore' : 'travel-explore'}
             color={color}
+            name={focused ? 'compass' : 'compass-outline'}
+          />
+        ),
+      }}
+    />
+    <Tabs.Screen
+      name="career"
+      options={{
+        title: 'Career',
+        tabBarIcon: ({ color, focused }) => (
+          <TabBarIcon
+            color={color}
+            name={focused ? 'cast-education' : 'book-education-outline'}
+          />
+        ),
+      }}
+    />
+    <Tabs.Screen
+      name="index"
+      options={{
+        title: 'Learn',
+        headerRight: HeaderRight,
+        tabBarIcon: ({ color, focused }) => (
+          <TabBarIcon
+            color={color}
+            name={focused ? 'book-education' : 'book-education-outline'}
+          />
+        ),
+      }}
+    />
+    <Tabs.Screen
+      name="search"
+      options={{
+        title: 'Search',
+        tabBarIcon: ({ color }) => <TabBarIcon color={color} name="magnify" />,
+      }}
+    />
+    <Tabs.Screen
+      name="profile"
+      options={{
+        title: 'Profile',
+        headerRight: HeaderRight,
+        tabBarIcon: ({ color, focused }) => (
+          <TabBarIcon
+            color={color}
+            name={focused ? 'account' : 'account-outline'}
           />
         ),
       }}

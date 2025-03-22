@@ -1,214 +1,294 @@
-import { Platform, ScrollView, useColorScheme, View } from 'react-native'
-import { Icon, List, Text, useTheme } from 'react-native-paper'
-
-import { Colors } from '@/ui'
+import React from 'react'
+import { View, ScrollView } from 'react-native'
+import {
+  Card,
+  Chip,
+  Icon,
+  IconButton,
+  List,
+  Text,
+  Tooltip,
+} from 'react-native-paper'
 
 const Explore = () => {
-  const theme = useTheme()
-  const colorScheme = useColorScheme()
+  const topics = ['Arts and Humanities', 'Business', 'Computer Science']
+  const me = require('@/assets/images/me.png')
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <View
-        style={{
-          height: 250,
-          marginBottom: 16,
-          backgroundColor: theme.colors.primaryContainer,
-        }}
-      >
-        <View
-          style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-end' }}
-        >
-          <Icon
-            source="react"
-            size={150}
-            color={theme.colors.onPrimaryContainer}
-          />
-        </View>
-
+      <List.Section>
         <View
           style={{
-            paddingHorizontal: 8,
+            gap: 16,
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
           }}
         >
-          <Icon
-            source="language-typescript"
-            size={75}
-            color={Colors[colorScheme ?? 'light'].blue.primary}
-          />
-          <Icon
-            source="language-javascript"
-            size={75}
-            color={Colors[colorScheme ?? 'light'].orange.primary}
-          />
+          <List.Subheader>Topics</List.Subheader>
+          <Tooltip title="See All">
+            <IconButton icon="chevron-right" onPress={() => {}} />
+          </Tooltip>
         </View>
-      </View>
 
-      <View style={{ padding: 16 }}>
-        <Text variant="displaySmall" style={{ fontWeight: 'bold' }}>
-          Explore
-        </Text>
-        <Text variant="bodyLarge">
-          This app includes example code to help you get started.
-        </Text>
-      </View>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ gap: 16, paddingHorizontal: 16 }}
+        >
+          {topics.map((t) => (
+            <Chip
+              key={t}
+              onPress={() => {}}
+              closeIcon="chevron-right"
+              onClose={() => {}}
+            >
+              {t}
+            </Chip>
+          ))}
+        </ScrollView>
+      </List.Section>
 
-      <List.Section title="Features">
-        <List.AccordionGroup>
-          <List.Accordion
-            id="1"
-            title="File-based routing"
-            description="This app has two screens:"
-            left={(props) => <List.Icon {...props} icon="file-tree" />}
-          >
-            <List.Item
-              title="app/(tabs)/index.tsx"
-              titleStyle={{ fontFamily: 'SpaceMono' }}
-              left={(props) => (
-                <List.Icon {...props} icon="language-typescript" />
-              )}
-            />
-            <List.Item
-              title="app/(tabs)/explore.tsx"
-              titleStyle={{ fontFamily: 'SpaceMono' }}
-              left={(props) => (
-                <List.Icon {...props} icon="language-typescript" />
-              )}
-            />
-            <List.Item
-              title="app/(tabs)/_layout.tsx"
-              titleStyle={{ fontFamily: 'SpaceMono' }}
-              description="The layout file sets up the tab navigator."
-              left={(props) => (
-                <List.Icon {...props} icon="page-layout-footer" />
-              )}
-            />
-            <List.Item
-              title="Learn more"
-              description="https://docs.expo.dev/router/introduction"
-              left={(props) => <List.Icon {...props} icon="link" />}
-            />
-          </List.Accordion>
+      <List.Section>
+        <View
+          style={{
+            gap: 16,
+            alignItems: 'center',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}
+        >
+          <List.Subheader>Popular in Computer Science</List.Subheader>
+          <Tooltip title="See All">
+            <IconButton icon="chevron-right" onPress={() => {}} />
+          </Tooltip>
+        </View>
 
-          <List.Accordion
-            id="2"
-            title="Android, iOS, and web support"
-            description="You can open this project on:"
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ gap: 16, paddingHorizontal: 16 }}
+        >
+          {topics.map((t) => (
+            <Card
+              key={t}
+              mode="outlined"
+              contentStyle={{ gap: 16 }}
+              onPress={() => {}}
+            >
+              <Card.Cover source={me} />
+              <Card.Content style={{ gap: 16 }}>
+                <Text variant="titleMedium">{t}</Text>
+                <Text>Google</Text>
+
+                <View
+                  style={{
+                    gap: 32,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Text variant="bodySmall">Course</Text>
+
+                  <View
+                    style={{
+                      gap: 16,
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <View
+                      style={{
+                        gap: 2,
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Icon size={16} source="star" />
+                      <Icon size={16} source="star" />
+                      <Icon size={16} source="star" />
+                      <Icon size={16} source="star" />
+                      <Icon size={16} source="star-half-full" />
+                    </View>
+                    <Text variant="bodySmall">(4.5)</Text>
+                  </View>
+                </View>
+              </Card.Content>
+            </Card>
+          ))}
+        </ScrollView>
+      </List.Section>
+
+      <List.Section>
+        <View
+          style={{
+            gap: 16,
+            alignItems: 'center',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}
+        >
+          <List.Subheader>Earn Your Degree</List.Subheader>
+          <Tooltip title="See All">
+            <IconButton icon="chevron-right" onPress={() => {}} />
+          </Tooltip>
+        </View>
+
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ gap: 16, paddingHorizontal: 16 }}
+        >
+          {topics.map((t) => (
+            <Card
+              key={t}
+              mode="outlined"
+              contentStyle={{ gap: 16 }}
+              onPress={() => {}}
+            >
+              <Card.Cover source={me} />
+              <Card.Content style={{ gap: 16 }}>
+                <Text variant="titleMedium">{t}</Text>
+                <Text>Google</Text>
+
+                <View
+                  style={{
+                    gap: 32,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Text variant="bodySmall">Course</Text>
+
+                  <View
+                    style={{
+                      gap: 16,
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <View
+                      style={{
+                        gap: 2,
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Icon size={16} source="star" />
+                      <Icon size={16} source="star" />
+                      <Icon size={16} source="star" />
+                      <Icon size={16} source="star" />
+                      <Icon size={16} source="star-half-full" />
+                    </View>
+                    <Text variant="bodySmall">(4.5)</Text>
+                  </View>
+                </View>
+              </Card.Content>
+            </Card>
+          ))}
+        </ScrollView>
+      </List.Section>
+
+      <List.Section>
+        <View
+          style={{
+            gap: 16,
+            alignItems: 'center',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}
+        >
+          <List.Subheader>Guided Projects for You</List.Subheader>
+          <Tooltip title="See All">
+            <IconButton icon="chevron-right" onPress={() => {}} />
+          </Tooltip>
+        </View>
+
+        {topics.map((t) => (
+          <List.Item
+            key={t}
+            title={t}
+            description="Duke University, Project"
+            onPress={() => {}}
             left={(props) => (
-              <List.Icon
+              <List.Image
                 {...props}
-                icon={
-                  Platform.select({
-                    android: 'android',
-                    ios: 'apple-ios',
-                    web: 'web',
-                  }) ?? 'android'
-                }
+                source={me}
+                style={{ ...props.style, borderRadius: 8 }}
               />
             )}
-          >
-            <List.Item
-              title="Android"
-              left={(props) => <List.Icon {...props} icon="android" />}
-            />
-            <List.Item
-              title="IOS"
-              left={(props) => <List.Icon {...props} icon="apple-ios" />}
-            />
-            <List.Item
-              title="Web"
-              description="To open the web version, press `w` in the terminal running this project."
-              left={(props) => <List.Icon {...props} icon="web" />}
-            />
-          </List.Accordion>
+          />
+        ))}
+      </List.Section>
 
-          <List.Accordion
-            id="3"
-            title="Custom fonts"
-            description="Open:"
-            left={(props) => <List.Icon {...props} icon="format-font" />}
-          >
-            <List.Item
-              title="app/_layout.tsx"
-              description="to see how to load custom fonts such as this one."
-              titleStyle={{ fontFamily: 'SpaceMono' }}
-              left={(props) => (
-                <List.Icon {...props} icon="language-typescript" />
-              )}
-            />
-            <List.Item
-              title="Learn more"
-              description="https://docs.expo.dev/versions/latest/sdk/font"
-              left={(props) => <List.Icon {...props} icon="link" />}
-            />
-          </List.Accordion>
+      <List.Section>
+        <View
+          style={{
+            gap: 16,
+            alignItems: 'center',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}
+        >
+          <List.Subheader>Top Rated</List.Subheader>
+          <Tooltip title="See All">
+            <IconButton icon="chevron-right" onPress={() => {}} />
+          </Tooltip>
+        </View>
 
-          <List.Accordion
-            id="4"
-            title="Images"
-            description="For static images, you can use the:"
-            left={(props) => <List.Icon {...props} icon="image-album" />}
-          >
-            <List.Item
-              title="@2x"
-              titleStyle={{ fontFamily: 'SpaceMono' }}
-              left={(props) => <List.Icon {...props} icon="at" />}
-            />
-            <List.Item
-              title="@3x"
-              titleStyle={{ fontFamily: 'SpaceMono' }}
-              description="suffixes to provide files for different screen densities"
-              left={(props) => <List.Icon {...props} icon="at" />}
-            />
-            <List.Item
-              title="Learn more"
-              description="https://reactnative.dev/docs/images"
-              left={(props) => <List.Icon {...props} icon="link" />}
-            />
-          </List.Accordion>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ gap: 16, paddingHorizontal: 16 }}
+        >
+          {topics.map((t) => (
+            <Card
+              key={t}
+              mode="outlined"
+              contentStyle={{ gap: 16 }}
+              onPress={() => {}}
+            >
+              <Card.Cover source={me} />
+              <Card.Content style={{ gap: 16 }}>
+                <Text variant="titleMedium">{t}</Text>
+                <Text>Google</Text>
 
-          <List.Accordion
-            id="5"
-            title="Light and dark mode components"
-            description="This template has light and dark mode support."
-            left={(props) => <List.Icon {...props} icon="theme-light-dark" />}
-          >
-            <List.Item
-              title="useColorScheme()"
-              descriptionNumberOfLines={3}
-              description="hook lets you inspect what the user's current color scheme is, and so you can adjust UI colors accordingly."
-              titleStyle={{ fontFamily: 'SpaceMono' }}
-              left={(props) => (
-                <List.Icon {...props} icon="language-typescript" />
-              )}
-            />
-            <List.Item
-              title="Learn more"
-              description="https://docs.expo.dev/develop/user-interface/color-themes/"
-              left={(props) => <List.Icon {...props} icon="link" />}
-            />
-          </List.Accordion>
+                <View
+                  style={{
+                    gap: 32,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Text variant="bodySmall">Course</Text>
 
-          <List.Accordion
-            id="6"
-            title="Animations"
-            description="This template includes an example of an animated component:"
-            left={(props) => <List.Icon {...props} icon="theme-light-dark" />}
-          >
-            <List.Item
-              title="components/HelloWave.tsx"
-              titleStyle={{ fontFamily: 'SpaceMono' }}
-              description="component uses the powerful react-native-reanimated library to create a waving hand animation."
-              descriptionNumberOfLines={3}
-              left={(props) => (
-                <List.Icon {...props} icon="language-typescript" />
-              )}
-            />
-          </List.Accordion>
-        </List.AccordionGroup>
+                  <View
+                    style={{
+                      gap: 16,
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <View
+                      style={{
+                        gap: 2,
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Icon size={16} source="star" />
+                      <Icon size={16} source="star" />
+                      <Icon size={16} source="star" />
+                      <Icon size={16} source="star" />
+                      <Icon size={16} source="star-half-full" />
+                    </View>
+                    <Text variant="bodySmall">(4.5)</Text>
+                  </View>
+                </View>
+              </Card.Content>
+            </Card>
+          ))}
+        </ScrollView>
       </List.Section>
     </ScrollView>
   )
